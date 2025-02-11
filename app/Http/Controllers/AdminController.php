@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Contact;
+use App\Models\Gallary;
+use Illuminate\Support\Facades\Auth;
+
+class AdminController extends Controller
+{
+    public function index()
+    {
+        if(Auth::id())
+        {
+            $usertype = Auth()->user()->usertype;
+
+            if($usertype == 'user')
+            {
+                return view('home.index');
+            }
+
+            elseif($usertype == 'admin')
+            {
+                return view('admin.index');
+            }
+        }
+
+        else{
+            return redirect()->back();
+        }
+    }
+
+    public function all_message()
+    {
+        $data = Contact::all();
+
+        return view('admin.all_message',compact('data'));
+    }
+
+    public function view_gallary()
+    {
+        $gallary = Gallary::all();
+
+        return view('admin.view_gallary',compact('gallary'));
+    }
+
+    public function add_gallary(Request $request)
+    {
+        $data = new Gallary;
+
+        $image = $request->image;
+
+        if($image)
+        {
+            $imagename=time().'.'.$image->getClientOriginalExtension();
+
+            $request->image->move('gallary',$imagename);
+
+            $data->image =$imagename;
+
+            $data->save();
+
+            return redirect()->back();
+        }
+    }
+
+    public function delete_gallary($id)
+    {
+        $data = Gallary::find($id);
+
+        $data->delete();
+
+        return redirect()->back();
+    }
+}
