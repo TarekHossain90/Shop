@@ -20,11 +20,11 @@ Route::post('/add_gallary',[AdminController::class,'add_gallary']);
 
 Route::get('/delete_gallary/{id}',[AdminController::class,'delete_gallary']);
 
+Route::get('/all_team',[AdminController::class,'all_team']);
 
+Route::post('/view_team',[AdminController::class,'view_team']);
 
-
-
-
+Route::get('/delete_team/{id}',[AdminController::class,'delete_team']);
 
 
 

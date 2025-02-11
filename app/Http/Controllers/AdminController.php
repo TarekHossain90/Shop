@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Contact;
 use App\Models\Gallary;
+use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -70,6 +71,48 @@ class AdminController extends Controller
     public function delete_gallary($id)
     {
         $data = Gallary::find($id);
+
+        $data->delete();
+
+        return redirect()->back();
+    }
+
+    public function all_team()
+    {
+        $data = Team::all();
+
+        return view('admin.all_team',compact('data'));
+    }
+
+    public function view_team(Request $request)
+    {
+        $data = new Team;
+
+        $data->name=$request->name;
+
+        $data->description=$request->description;
+
+        $data->price=$request->price;
+
+        $image = $request->image;
+
+        if($image)
+        {
+            $imagename=time().'.'.$image->getClientOriginalExtension();
+
+            $request->image->move('team',$imagename);
+
+            $data->image = $imagename;
+        }
+
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function delete_team($id)
+    {
+        $data = Team::find($id);
 
         $data->delete();
 

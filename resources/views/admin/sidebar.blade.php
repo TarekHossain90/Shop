@@ -10,7 +10,7 @@
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
         <ul class="list-unstyled">
                 <li class="active"><a href="{{url('/home')}}"> <i class="icon-home"></i>Home </a></li>
-                <li><a href="tables.html"> <i class="icon-grid"></i>Tables </a></li>
+                <li><a href="{{url('all_team')}}"> <i class="icon-grid"></i>Team </a></li>
                 <li><a href="{{url('view_gallary')}}"> <i class="fa fa-bar-chart"></i>Gallary </a></li>
                 <li><a href="{{url('all_message')}}"> <i class="icon-padnote"></i>Message </a></li>
                 
