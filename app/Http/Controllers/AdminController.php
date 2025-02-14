@@ -20,7 +20,11 @@ class AdminController extends Controller
 
             if($usertype == 'user')
             {
-                return view('home.index');
+                $gallary = Gallary::all();
+
+                $data = Team::all();
+
+                return view('home.index',compact('gallary','data'));
             }
 
             elseif($usertype == 'admin')
